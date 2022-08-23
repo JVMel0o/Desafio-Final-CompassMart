@@ -18,6 +18,10 @@ class productRepository{
     async delete(id: String): Promise<IProductResponse | null> {
         return productSchema.findByIdAndDelete(id);
     }
+
+    async update(id: String, payload: IProduct): Promise<IProductResponse | null> {
+        return productSchema.findByIdAndUpdate(id, payload);
+    }
 };
 
 export default new productRepository();
