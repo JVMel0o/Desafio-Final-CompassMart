@@ -8,4 +8,4 @@ class productRepository{
     }
 };
 
-export default new productRepository;
+export default new productRepository();
