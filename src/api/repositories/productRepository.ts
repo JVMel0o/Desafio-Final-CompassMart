@@ -20,7 +20,7 @@ class productRepository{
     }
 
     async update(id: String, payload: IProduct): Promise<IProductResponse | null> {
-        return productSchema.findByIdAndUpdate(id);
+        return productSchema.findByIdAndUpdate(id, payload);
     }
 };
 
