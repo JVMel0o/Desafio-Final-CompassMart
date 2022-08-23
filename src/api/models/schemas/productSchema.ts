@@ -19,6 +19,6 @@ const ProductSchema = new Schema<IProduct>({
 
 //productSchema.plugin(paginate);
 
-const productSchema = mongoose.model<IProduct, mongoose.PaginateModel<IProductResponse>>('product', ProductSchema);
+const productSchema = mongoose.model<IProduct, mongoose.PaginateModel<any>>('product', ProductSchema);
 
 export default productSchema;
