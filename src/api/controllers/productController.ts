@@ -38,7 +38,7 @@ class productController {
             await productService.delete(id);
             return res.status(204).json();
         } catch (error) {
-            return res.status(500).json({ error });
+            return res.status(404).json({ error });
         }
     }
 }

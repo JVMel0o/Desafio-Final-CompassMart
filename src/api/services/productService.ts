@@ -16,8 +16,8 @@ class productService {
         return await productRepository.findById(id);
     }
 
-    async delete (id: String) {
-        await productRepository.delete(id);
+    async delete (id: String): Promise<IProductResponse | null> {
+        return await productRepository.delete(id);
     }
 }
 

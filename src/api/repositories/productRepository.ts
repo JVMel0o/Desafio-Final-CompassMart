@@ -15,8 +15,8 @@ class productRepository{
         return productSchema.findById(id);
     }
 
-    async delete(id: String) {
-        productSchema.findByIdAndDelete(id);
+    async delete(id: String): Promise<IProductResponse | null> {
+        return productSchema.findByIdAndDelete(id);
     }
 };
 
