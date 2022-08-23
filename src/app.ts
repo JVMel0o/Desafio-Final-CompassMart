@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import routes from './router/index';
 import './infra/database/mongo/index';
-import products from './api/models/schemas/productSchema';
 
 class App {
   public express: express.Application;
@@ -9,6 +9,7 @@ class App {
   public constructor () {
     this.express = express();
     this.middlewares();
+    this.routes();
   }
 
   private middlewares ():void {
@@ -16,6 +17,9 @@ class App {
     this.express.use(cors());
   }
 
+  private routes ():void {
+    this.express.use(...routes);
+  }
 }
 
 export default new App().express;
