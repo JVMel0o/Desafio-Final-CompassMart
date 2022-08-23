@@ -11,6 +11,10 @@ class productService {
     async findAll (): Promise<any> {
         return await productRepository.findAll();
     }
+
+    async findById (id: String): Promise<IProductResponse | null> {
+        return await productRepository.findById(id);
+    }
 }
 
 export default new productService();
