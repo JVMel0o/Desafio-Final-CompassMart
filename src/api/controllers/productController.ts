@@ -13,7 +13,7 @@ class productController {
         }
     }
 
-    async findAll (res: Response) {
+    async findAll (req: Request, res: Response) {
         try {
             const result = await productService.findAll();
             return res.status(200).json(result);
