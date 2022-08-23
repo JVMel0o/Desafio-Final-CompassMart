@@ -14,6 +14,10 @@ class productRepository{
     async findById(id: String): Promise<IProductResponse | null> {
         return productSchema.findById(id);
     }
+
+    async delete(id: String): Promise<IProductResponse | null> {
+        return productSchema.findByIdAndDelete(id);
+    }
 };
 
 export default new productRepository();

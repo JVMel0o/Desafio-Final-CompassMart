@@ -15,6 +15,10 @@ class productService {
     async findById (id: String): Promise<IProductResponse | null> {
         return await productRepository.findById(id);
     }
+
+    async delete (id: String): Promise<IProductResponse | null> {
+        return await productRepository.delete(id);
+    }
 }
 
 export default new productService();
