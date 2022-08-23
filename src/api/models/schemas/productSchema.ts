@@ -2,7 +2,7 @@ import { IProduct, IProductResponse } from "../interfaces/productInterface";
 import mongoose, { Schema, model } from "mongoose";
 import { paginate } from "mongoose-paginate-v2";
 
-const productSchema = new Schema<IProduct>({
+const ProductSchema = new Schema<IProduct>({
     title: { type: String, required: true},
     description: { type: String, required: true},
     department: { type: String, required: true},
@@ -19,6 +19,6 @@ const productSchema = new Schema<IProduct>({
 
 //productSchema.plugin(paginate);
 
-const products = mongoose.model<IProduct, mongoose.PaginateModel<IProductResponse>>('product', productSchema);
+const productSchema = mongoose.model<IProduct, mongoose.PaginateModel<IProductResponse>>('product', ProductSchema);
 
-export default products;
+export default productSchema;
