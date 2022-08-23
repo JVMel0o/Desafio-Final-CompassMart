@@ -46,7 +46,8 @@ class productController {
         try {
             const id = req.params.id;
             const { title, description, department, brand, price, qtd_stock, bar_code } = req.body;
-            const result = await productService.update(id, req.body);
+            await productService.update(id, req.body);
+            const result = await productService.findById(id);
             return res.status(201).json(result);
         } catch (error) {
             return res.status(500).json({ error });
