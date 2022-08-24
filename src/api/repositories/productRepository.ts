@@ -1,5 +1,6 @@
 import { IProduct, IProductResponse } from "../models/interfaces/productInterface";
 import productSchema from "../models/schemas/productSchema";
+import productPaginate from "../../paginate/productPaginate";
 
 class productRepository{
 
@@ -8,7 +9,13 @@ class productRepository{
     }
 
     async findAll(): Promise<any> {
-        return productSchema.find();
+        const options = {
+            page: 1,
+            limit: 50,
+            customLabels: productPaginate
+        };
+        const products = await productSchema.paginate({}, options);
+        return products;
     }
 
     async findById(id: String): Promise<IProductResponse | null> {
