@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import productController from '../api/controllers/productController';
 import productCreateValidation from '../api/validation/products/product-create-validation';
+import productPatchValidation from '../api/validation/products/product-patch-validation';
 import productUpdateValidation from '../api/validation/products/product-update-validation';
 
 const router = Router();
@@ -11,6 +12,6 @@ router.get(`${mainRoute}`, productController.findAll);
 router.get(`${mainRoute}/:id`, productController.findById);
 router.delete(`${mainRoute}/:id`, productController.delete);
 router.put(`${mainRoute}/:id`, productUpdateValidation, productController.update);
-router.patch(`${mainRoute}/:id`, productController.update);
+router.patch(`${mainRoute}/:id`, productPatchValidation, productController.update);
 
 export default router;
