@@ -7,7 +7,7 @@ export interface IProduct {
     brand: string,
     price: number,
     qtd_stock: number,
-    stock_control_enable: boolean,
+    stock_control_enabled: boolean,
     bar_code: string;
 }
 
