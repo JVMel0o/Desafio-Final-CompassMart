@@ -22,6 +22,19 @@ class productRepository{
         return productSchema.findById(id);
     }
 
+    async findByLowStock(): Promise<any> {
+        const queryLowStock = {
+            stock_control_enabled: true,
+            qtd_stock: { $lt: 100 }
+        };
+        const options = {
+            page: 1,
+            limit: 50,
+            customLabels: productPaginate
+        };
+        const productsLowStock = await productSchema.paginate(queryLowStock, options);
+    }
+
     async delete(id: String): Promise<IProductResponse | null> {
         return productSchema.findByIdAndDelete(id);
     }
