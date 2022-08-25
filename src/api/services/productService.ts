@@ -26,7 +26,9 @@ class productService {
     }
 
     async update (id: String, payload: IProduct): Promise<IProductResponse | null> {
-        return await productRepository.update(id, payload);
+        const result = await productRepository.update(id, payload);
+        if(result === null) throw new productIdDoNotExists();
+        return result;
     }
 }
 
