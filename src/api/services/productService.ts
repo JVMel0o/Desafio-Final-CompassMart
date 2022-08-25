@@ -19,6 +19,10 @@ class productService {
         return result;
     }
 
+    async findByLowStock (): Promise<any> {
+        return await productRepository.findByLowStock();
+    }
+
     async delete (id: String): Promise<IProductResponse | null> {
         const result = await productRepository.delete(id);
         if(result === null) throw new productIdDoNotExists();

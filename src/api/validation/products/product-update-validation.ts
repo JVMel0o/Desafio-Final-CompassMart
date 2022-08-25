@@ -9,7 +9,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
             department: Joi.string().required(),
             brand: Joi.string().required(),
             price: Joi.number().required().min(0.01).max(1000),
-            qtd_stock: Joi.number().required().min(1).max(100000),
+            qtd_stock: Joi.number().required().min(0).max(100000),
             bar_code: Joi.string().required().length(13),
         });
 
