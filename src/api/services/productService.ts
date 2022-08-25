@@ -20,7 +20,9 @@ class productService {
     }
 
     async delete (id: String): Promise<IProductResponse | null> {
-        return await productRepository.delete(id);
+        const result = await productRepository.delete(id);
+        if(result === null) throw new productIdDoNotExists();
+        return result;
     }
 
     async update (id: String, payload: IProduct): Promise<IProductResponse | null> {

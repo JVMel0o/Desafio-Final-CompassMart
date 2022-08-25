@@ -28,7 +28,7 @@ class productController {
             const result = await productService.findById(id);
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(500).json({ error });
+            return res.status(404).json({ error });
         }
     }
 
@@ -50,7 +50,7 @@ class productController {
             const result = await productService.findById(id);
             return res.status(201).json(result);
         } catch (error) {
-            return res.status(500).json({ error });
+            return res.status(404).json({ error });
         }
     }
 }
