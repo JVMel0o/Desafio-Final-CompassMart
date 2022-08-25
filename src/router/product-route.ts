@@ -11,8 +11,8 @@ const mainRoute = '/api/v1/product';
 router.get(`${mainRoute}`, productController.findAll);
 router.get(`${mainRoute}/:id`, productIdValidation, productController.findById);
 router.post(`${mainRoute}`, productCreateValidation, productController.create);
-router.put(`${mainRoute}/:id`, productUpdateValidation, productController.update);
-router.patch(`${mainRoute}/:id`, productPatchValidation, productController.update);
+router.put(`${mainRoute}/:id`, productUpdateValidation, productIdValidation, productController.update);
+router.patch(`${mainRoute}/:id`, productPatchValidation, productIdValidation, productController.update);
 router.delete(`${mainRoute}/:id`, productIdValidation, productController.delete);
 
 export default router;
