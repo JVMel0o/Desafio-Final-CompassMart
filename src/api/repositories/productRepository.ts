@@ -1,6 +1,7 @@
 import { IProduct, IProductResponse } from "../models/interfaces/productInterface";
 import productSchema from "../models/schemas/productSchema";
 import productPaginate from "../../paginate/productPaginate";
+import { PaginateResult } from "mongoose";
 
 class productRepository{
 
@@ -8,7 +9,7 @@ class productRepository{
         return productSchema.create(payload);
     }
 
-    async findAll(): Promise<any> {
+    async findAll(): Promise<PaginateResult<IProductResponse>> {
         const options = {
             page: 1,
             limit: 50,
@@ -22,17 +23,15 @@ class productRepository{
         return productSchema.findById(id);
     }
 
-    async findByLowStock(): Promise<any> {
-        const queryLowStock = {
-            stock_control_enabled: true,
-            qtd_stock: { $lt: 100 }
-        };
+    async findByLowStock(): Promise<PaginateResult<IProductResponse>> {
         const options = {
             page: 1,
             limit: 50,
+            sort: {qtd_stock: 1},
             customLabels: productPaginate
         };
-        const productsLowStock = await productSchema.paginate(queryLowStock, options);
+        const productsLowStock = await productSchema.paginate({qtd_stock: { $lt: 100 }, stock_control_enabled: true}, options);
+        return productsLowStock;
     }
 
     async delete(id: String): Promise<IProductResponse | null> {
