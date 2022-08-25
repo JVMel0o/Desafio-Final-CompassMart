@@ -1,3 +1,4 @@
+import productIdDoNotExists from "../errors/products/productIdDoNotExists";
 import { IProduct, IProductResponse } from "../models/interfaces/productInterface";
 import productRepository from "../repositories/productRepository";
 
@@ -13,7 +14,9 @@ class productService {
     }
 
     async findById (id: String): Promise<IProductResponse | null> {
-        return await productRepository.findById(id);
+        const result = await productRepository.findById(id);
+        if(result === null) throw new productIdDoNotExists();
+        return result;
     }
 
     async delete (id: String): Promise<IProductResponse | null> {
