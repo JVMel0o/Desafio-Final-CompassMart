@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import CSVFileError from '../errors/products/CSVFileError';
 import productService from '../services/productService';
 
 class productController {
@@ -8,6 +9,17 @@ class productController {
             const { title, description, department, brand, price, qtd_stock, bar_code } = req.body;
             const result = await productService.create(req.body);
             return res.status(201).json(result);
+        } catch (error) {
+            return res.status(500).json({ error });
+        }
+    }
+
+    async createByCSV (req: Request, res: Response) {
+        try {
+            const csv = req.file?.buffer.toString('utf-8');
+            if (csv === undefined) throw new CSVFileError;
+            const result = await productService.createByCSV(csv);
+            return res.status(200).json(result);
         } catch (error) {
             return res.status(500).json({ error });
         }
