@@ -5,6 +5,9 @@ import productRepository from "../repositories/productRepository";
 class productService {
 
     async create (payload: IProduct): Promise<IProductResponse> {
+        if(payload.qtd_stock <= 0)
+            payload.stock_control_enabled = false 
+            payload.stock_control_enabled = true;
         const result = await productRepository.create(payload);
         return result;
     }
