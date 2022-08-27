@@ -1,34 +1,52 @@
 import { Types } from "mongoose";
 
 export interface IProduct {
-    title: string,
-    description: string,
-    department: string,
-    brand: string,
+    title: String,
+    description: String,
+    department: String,
+    brand: String,
     price: number,
     qtd_stock: number,
     stock_control_enabled: boolean,
-    bar_code: string;
+    bar_code: String;
 }
 
 export interface IProductResponse {
     _id: Types.ObjectId,
-    title: string,
-    description: string,
-    department: string,
-    brand: string,
+    title: String,
+    description: String,
+    department: String,
+    brand: String,
     price: number,
     qtd_stock: number,
     stock_control_enabled: boolean,
-    bar_code: string;
+    bar_code: String;
 }
+
+export interface IProductCSV {
+    title?: String,
+    description?: String,
+    department?: String,
+    brand?: String,
+    price?: number,
+    qtd_stock?: number,
+    stock_control_enabled?: boolean,
+    bar_code?: String;
+}
+
 
 export interface IProductResponseCSV {
     success: number,
     errors: number,
-    error_details?: [{
-        title: string,
-        bar_code: string,
-        error?: string
+    error_details?: [{                                                                                                                                                          
+        title: String,
+        bar_code: String,
+        errors?: [String],
+        error?: String
     }]
+}
+
+export interface IVerifyCSV {
+    verify: boolean,
+    messages?: [String]                                                                                                                         
 }
