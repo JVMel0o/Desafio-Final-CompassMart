@@ -9,6 +9,10 @@ class productRepository{
         return productSchema.create(payload);
     }
 
+    async createByCSV (payload: IProduct[]): Promise<void> {
+        await productSchema.insertMany(payload);
+    }
+
     async findAll(): Promise<PaginateResult<IProductResponse>> {
         const options = {
             page: 1,
