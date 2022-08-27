@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+import { Types } from 'mongoose'
 
 export interface IProduct {
     title: String,
@@ -41,11 +41,10 @@ export interface IProductCSV {
     bar_code?: String;
 }
 
-
 export interface IProductResponseCSV {
     success: number,
     errors: number,
-    error_details?: [{                                                                                                                                                          
+    error_details?: [{
         title: String,
         bar_code: String,
         errors?: [String],
@@ -55,5 +54,5 @@ export interface IProductResponseCSV {
 
 export interface IVerifyCSV {
     verify: boolean,
-    messages?: [String]                                                                                                                         
+    messages?: [String]
 }
