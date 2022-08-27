@@ -22,3 +22,13 @@ export interface IProductResponse {
     stock_control_enabled: boolean,
     bar_code: string;
 }
+
+export interface IProductResponseCSV {
+    success: number,
+    errors: number,
+    error_details?: [{
+        title: string,
+        bar_code: string,
+        error?: string
+    }]
+}
