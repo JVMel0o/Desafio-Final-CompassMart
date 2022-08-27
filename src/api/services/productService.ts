@@ -1,5 +1,5 @@
 import productIdDoNotExists from "../errors/products/productIdDoNotExists";
-import { IVerifyCSV, IProduct, IProductResponse, IProductResponseCSV } from "../models/interfaces/productInterface";
+import { IVerifyCSV, IProduct, IProductResponse, IProductResponseCSV, IQuery } from "../models/interfaces/productInterface";
 import productRepository from "../repositories/productRepository";
 
 class productService {
@@ -115,8 +115,8 @@ class productService {
         return verified;
     }
 
-    async findAll (): Promise<any> {
-        return await productRepository.findAll();
+    async findAll (query: IQuery): Promise<any> {
+        return await productRepository.findAll(query);
     }
 
     async findById (id: String): Promise<IProductResponse | null> {
