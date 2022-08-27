@@ -111,6 +111,10 @@ class productService {
             ? verified.messages = ['qtd_stock is lower than 1']
             : verified.messages.push('qtd_stock is higher than 100000');
         }
+        if( await this.findByBarCode(csv.bar_code)) { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['bar_code duplicated']
+            : verified.messages.push('bar_code duplicated');
+        }
         
         return verified;
     }
@@ -129,8 +133,8 @@ class productService {
         return await productRepository.findByLowStock();
     }
 
-    async findByBarCode (barcode: String) {
-        await productRepository.findByBarCode(barcode);
+    async findByBarCode (barcode: String): Promise<Boolean> {
+        return await productRepository.findByBarCode(barcode);
     }
 
     async delete (id: String): Promise<IProductResponse | null> {
