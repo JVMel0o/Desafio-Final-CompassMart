@@ -129,6 +129,10 @@ class productService {
         return await productRepository.findByLowStock();
     }
 
+    async findByBarCode (barcode: String) {
+        await productRepository.findByBarCode(barcode);
+    }
+
     async delete (id: String): Promise<IProductResponse | null> {
         const result = await productRepository.delete(id);
         if(result === null) throw new productIdDoNotExists();

@@ -38,6 +38,10 @@ class productRepository{
         return productsLowStock;
     }
 
+    async findByBarCode(barcode: String) {
+        await productSchema.findOne({ bar_code: barcode });
+    }
+
     async delete(id: String): Promise<IProductResponse | null> {
         return productSchema.findByIdAndDelete(id);
     }
