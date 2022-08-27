@@ -87,13 +87,9 @@ class productService {
             ? verified.messages = ['qtd_stock is null']
             : verified.messages.push('qtd_stock is null');
         }    
-        if(!csv.bar_code) { verified.verify = false; verified.messages === undefined
-            ? verified.messages = ['bar_code is null']
-            : verified.messages.push('bar_code is null');
-        }
         if(csv.bar_code < '13' || csv.bar_code > '13') { verified.verify = false; verified.messages === undefined
-            ? verified.messages = ['bar_code is null']
-            : verified.messages.push('bar_code digit is 13');
+            ? verified.messages = ['bar_code min digit is 13']
+            : verified.messages.push('bar_code min digit is 13');
         }  
         if(csv.price < 0.01) { verified.verify = false; verified.messages === undefined
             ? verified.messages = ['price is lower than 0.01']
