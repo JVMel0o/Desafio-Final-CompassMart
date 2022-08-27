@@ -27,7 +27,7 @@ class productController {
 
     async findAll (req: Request, res: Response) {
         try {
-            const result = await productService.findAll();
+            const result = await productService.findAll(req.query);
             return res.status(200).json(result);
         } catch (error) {
             return res.status(500).json({ error });
