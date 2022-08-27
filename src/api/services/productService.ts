@@ -143,6 +143,9 @@ class productService {
     }
 
     async update (id: String, payload: IProduct): Promise<IProductResponse | null> {
+        payload.qtd_stock === 0
+           ? payload.stock_control_enabled = false 
+           : payload.stock_control_enabled = true;
         const result = await productRepository.update(id, payload);
         if(result === null) throw new productIdDoNotExists();
         return result;
