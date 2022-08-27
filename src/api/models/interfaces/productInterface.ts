@@ -11,7 +11,7 @@ export interface IProduct {
     bar_code: String;
 }
 
-export interface IQuerry {
+export interface IQuery {
     department?: String,
     brand?: String,
     page?: number,
