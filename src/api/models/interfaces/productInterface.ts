@@ -11,6 +11,13 @@ export interface IProduct {
     bar_code: String;
 }
 
+export interface IQuery {
+    department?: String,
+    brand?: String,
+    page?: number,
+    limit?: number
+}
+
 export interface IProductResponse {
     _id: Types.ObjectId,
     title: String,

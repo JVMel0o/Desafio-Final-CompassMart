@@ -1,4 +1,4 @@
-import { IProduct, IProductResponse } from "../models/interfaces/productInterface";
+import { IProduct, IProductResponse, IQuery } from "../models/interfaces/productInterface";
 import productSchema from "../models/schemas/productSchema";
 import productPaginate from "../../paginate/productPaginate";
 import { PaginateResult } from "mongoose";
@@ -13,13 +13,15 @@ class productRepository{
         await productSchema.insertMany(payload);
     }
 
-    async findAll(): Promise<PaginateResult<IProductResponse>> {
+    async findAll(query: IQuery): Promise<PaginateResult<IProductResponse>> {
         const options = {
-            page: 1,
-            limit: 50,
+            page: query.page || 1,
+            limit: query.limit || 50,
             customLabels: productPaginate
         };
-        const products = await productSchema.paginate({}, options);
+        const products = await productSchema.paginate({
+        department: { $regex: (query.department !== undefined ? query.department : '') },
+        brand: { $regex: (query.brand !== undefined ? query.brand : '') }}, options);
         return products;
     }
 

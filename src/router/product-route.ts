@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import productController from '../api/controllers/productController';
 import productCreateValidation from '../api/validation/products/product-create-validation';
 import productIdValidation from '../api/validation/products/product-id-validation';
