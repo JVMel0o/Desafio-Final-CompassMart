@@ -1,5 +1,5 @@
 import productIdDoNotExists from "../errors/products/productIdDoNotExists";
-import { IProduct, IProductResponse } from "../models/interfaces/productInterface";
+import { IVerifyCSV, IProduct, IProductResponse, IProductResponseCSV } from "../models/interfaces/productInterface";
 import productRepository from "../repositories/productRepository";
 
 class productService {
@@ -7,6 +7,112 @@ class productService {
     async create (payload: IProduct): Promise<IProductResponse> {
         const result = await productRepository.create(payload);
         return result;
+    }
+
+    async createByCSV (csv: String): Promise<IProductResponseCSV> {
+        const csvList = csv.split('\n').map((row) => row.replace(/"/gi, '').replace(/\r/gi, '').split(','));
+        csvList.shift();
+        return await this.insertByCSV(csvList);
+    }
+
+    async insertByCSV (csv: String[][]): Promise<IProductResponseCSV> {
+        const insertCSV: IProduct[] = [];
+        const result: IProductResponseCSV = {
+            success: 0,
+            errors: 0
+        };
+
+        for await (const element of csv) {
+            const newProduct: IProduct = {
+              title: element[0] || '',
+              description: element[1] || '',
+              department: element[2] || '',
+              brand: element[3] || '',
+              price: Number(element[4]) || 0,
+              qtd_stock: Number(element[5]) || 0,
+              stock_control_enabled: true,
+              bar_code: element[6] || ''
+            };
+
+        const verify: IVerifyCSV = await this.verifyProductCSV(newProduct);
+
+        if (verify.verify === true) {
+            insertCSV.push(newProduct);
+            result.success = Number(result.success) + 1;
+        } else {
+            result.errors = Number(result.errors) + 1;
+            result.error_details === undefined
+                ? result.error_details = [{
+                    title: newProduct.title,
+                    bar_code: newProduct.bar_code,
+                    errors: verify.messages
+          }]
+            : result.error_details?.push({
+                title: newProduct.title,
+                bar_code: newProduct.bar_code,
+                errors: verify.messages
+          });
+      }
+    };
+        await productRepository.createByCSV(insertCSV);
+        return result;
+        
+    }
+
+    async verifyProductCSV (csv: IProduct): Promise<IVerifyCSV> {
+        const verified: IVerifyCSV = {
+            verify: true
+        };
+        if(!csv.title) { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['title is null']
+            : verified.messages.push('title is null');
+        }
+        if(!csv.department) { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['description is null']
+            : verified.messages.push('description is null');
+        }
+        if(!csv.department) { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['department is null']
+            : verified.messages.push('department is null');
+        }
+        if(!csv.brand) { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['brand is null']
+            : verified.messages.push('brand is null'); 
+        }
+        if(!csv.price) { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['price is null']
+            : verified.messages.push('price is null');
+        }
+        if(!csv.qtd_stock) { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['qtd_stock is null']
+            : verified.messages.push('qtd_stock is null');
+        }    
+        if(!csv.bar_code) { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['bar_code is null']
+            : verified.messages.push('bar_code is null');
+        }
+        if(csv.bar_code < '13' || csv.bar_code > '13') { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['bar_code is null']
+            : verified.messages.push('bar_code digit is 13');
+        }  
+        if(csv.price < 0.01) { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['price is lower than 0.01']
+            : verified.messages.push('price is lower than 0.01');
+        }
+        if(csv.price > 1000) { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['price is higher than 0.01']
+            : verified.messages.push('price is higher than 0.01');
+        }
+        if(csv.qtd_stock < 1) { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['qtd_stock is lower than 1']
+            : verified.messages.push('qtd_stock is lower than 1');
+        }
+        if(csv.qtd_stock > 100000) { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['qtd_stock is lower than 1']
+            : verified.messages.push('qtd_stock is higher than 100000');
+        }
+        
+        return verified;
     }
 
     async findAll (): Promise<any> {
