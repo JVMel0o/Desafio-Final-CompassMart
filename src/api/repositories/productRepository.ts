@@ -38,6 +38,12 @@ class productRepository{
         return productsLowStock;
     }
 
+    async findByBarCode(barcode: String): Promise<Boolean> {
+        const result = await productSchema.findOne({ bar_code: barcode });
+        if(result) return true;
+        return false;
+    }
+
     async delete(id: String): Promise<IProductResponse | null> {
         return productSchema.findByIdAndDelete(id);
     }

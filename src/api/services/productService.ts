@@ -87,13 +87,9 @@ class productService {
             ? verified.messages = ['qtd_stock is null']
             : verified.messages.push('qtd_stock is null');
         }    
-        if(!csv.bar_code) { verified.verify = false; verified.messages === undefined
-            ? verified.messages = ['bar_code is null']
-            : verified.messages.push('bar_code is null');
-        }
         if(csv.bar_code < '13' || csv.bar_code > '13') { verified.verify = false; verified.messages === undefined
-            ? verified.messages = ['bar_code is null']
-            : verified.messages.push('bar_code digit is 13');
+            ? verified.messages = ['bar_code min digit is 13']
+            : verified.messages.push('bar_code min digit is 13');
         }  
         if(csv.price < 0.01) { verified.verify = false; verified.messages === undefined
             ? verified.messages = ['price is lower than 0.01']
@@ -111,6 +107,10 @@ class productService {
             ? verified.messages = ['qtd_stock is lower than 1']
             : verified.messages.push('qtd_stock is higher than 100000');
         }
+        if( await this.findByBarCode(csv.bar_code)) { verified.verify = false; verified.messages === undefined
+            ? verified.messages = ['bar_code duplicated']
+            : verified.messages.push('bar_code duplicated');
+        }
         
         return verified;
     }
@@ -127,6 +127,10 @@ class productService {
 
     async findByLowStock (): Promise<any> {
         return await productRepository.findByLowStock();
+    }
+
+    async findByBarCode (barcode: String): Promise<Boolean> {
+        return await productRepository.findByBarCode(barcode);
     }
 
     async delete (id: String): Promise<IProductResponse | null> {
