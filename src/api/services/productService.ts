@@ -46,12 +46,12 @@ class ProductService {
           ? result.error_details = [{
             title: newProduct.title,
             bar_code: newProduct.bar_code,
-            errors: verify.messages
+            error: verify.messages
           }]
           : result.error_details?.push({
             title: newProduct.title,
             bar_code: newProduct.bar_code,
-            errors: verify.messages
+            error: verify.messages
           })
       }
     };
