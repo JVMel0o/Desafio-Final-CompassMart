@@ -7,7 +7,7 @@ class Database {
   }
 
   connect () {
-    mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_CLUSTER}.q5yt5ki.mongodb.net/`)
+    mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_CLUSTER}.rucvxcz.mongodb.net/?retryWrites=true&w=majority`)
     mongoose.connection.on('error', console.log.bind(console, 'Error connection.'))
     mongoose.connection.once('open', () => {
       console.log('Connected with database.')

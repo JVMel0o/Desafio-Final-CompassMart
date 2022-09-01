@@ -47,8 +47,8 @@ export interface IProductResponseCSV {
     error_details?: [{
         title: String,
         bar_code: String,
-        errors?: [String],
-        error?: String
+        error?: [String],
+        errors?: String
     }]
 }
 
