@@ -1,10 +1,15 @@
 import { IPaginate } from '../models/interfaces/paginateInterface'
-import { IUser, IUserAuthentication } from '../models/interfaces/userInterface'
+import { IUser } from '../models/interfaces/userInterface'
 import userRepository from '../repositories/userRepository'
+const bcrypt = require('bcrypt')
 
 class UserService {
-  async create (payload: IUser): Promise<IUser | IUserAuthentication> {
-    return await userRepository.create(payload)
+  async create (payload: IUser): Promise<IUser> {
+    const hashCost = 12
+    payload.password = await bcrypt.hash(payload.password, hashCost)
+    await userRepository.create(payload)
+    const userResponse: IUser = {email: payload.email, password: payload.password}
+    return userResponse
   }
 
   async findAll (query: IPaginate) {
