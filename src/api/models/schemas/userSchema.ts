@@ -1,10 +1,10 @@
-import { IUser } from '../interfaces/userInterface';
+import { IUser } from '../interfaces/userInterface'
 import mongoose, { Schema } from 'mongoose'
-import paginate from 'mongoose-paginate-v2';
+import paginate from 'mongoose-paginate-v2'
 
-const UserSchema = new Schema<IUser> ({
-    email: { type: String, required: true },
-    password: { type: String, required: true }
+const UserSchema = new Schema<IUser>({
+  email: { type: String, required: true },
+  password: { type: String, required: true }
 })
 
 UserSchema.plugin(paginate)
