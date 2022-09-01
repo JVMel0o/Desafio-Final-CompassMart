@@ -3,7 +3,7 @@ import mongoose, { Schema } from 'mongoose'
 import paginate from 'mongoose-paginate-v2'
 
 const UserSchema = new Schema<IUser>({
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   password: { type: String, required: true }
 })
 
