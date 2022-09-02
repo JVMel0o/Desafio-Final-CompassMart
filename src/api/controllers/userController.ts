@@ -29,6 +29,15 @@ class UserController {
       return res.status(404).json({ error })
     }
   }
+
+  async authentication (req: Request, res: Response) {
+    try {
+      const result = await userService.authentication(req.body)
+      return res.status(200).json(result)
+    } catch (error) {
+      return res.status(404).json({ error })
+    }
+  }
 }
 
 export default new UserController()
