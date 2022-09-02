@@ -1,7 +1,9 @@
 import { IPaginate } from '../models/interfaces/paginateInterface'
-import { IUser } from '../models/interfaces/userInterface'
+import { IUser, IUserAuthentication } from '../models/interfaces/userInterface'
 import userRepository from '../repositories/userRepository'
+import 'dotenv/config'
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 class UserService {
   async create (payload: IUser): Promise<IUser> {
@@ -16,8 +18,17 @@ class UserService {
     return await userRepository.findAll(query)
   }
 
-  async deleteByEmail (email: string) {
+  async deleteByEmail (email: String) {
     return await userRepository.deleteByEmail(email)
+  }
+
+  async authentication (payload: IUser): Promise<IUserAuthentication> {
+    const token: IUserAuthentication = { email: payload.email, token: await this.createToken(payload.email) }
+    return token
+  }
+
+  async createToken (email: String): Promise<String> {
+    return jwt.sign({ id: email }, process.env.JWT_KEY, { expiresIn: '15m' })
   }
 }
 
