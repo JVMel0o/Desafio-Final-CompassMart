@@ -8,7 +8,7 @@ class UserService {
     const hashCost = 12
     payload.password = await bcrypt.hash(payload.password, hashCost)
     await userRepository.create(payload)
-    const userResponse: IUser = {email: payload.email, password: payload.password}
+    const userResponse: IUser = { email: payload.email, password: payload.password }
     return userResponse
   }
 
