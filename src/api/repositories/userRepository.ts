@@ -20,7 +20,7 @@ class UserRepository {
   }
 
   async findByEmail (email: String): Promise<IUser | null> {
-    return userSchema.findOne(email)
+    return userSchema.findOne({ email })
   }
 
   async deleteByEmail (email: String): Promise<IUser | null> {
