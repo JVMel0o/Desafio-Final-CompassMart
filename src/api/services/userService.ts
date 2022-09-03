@@ -4,6 +4,7 @@ import userRepository from '../repositories/userRepository'
 import 'dotenv/config'
 import UserEmailDoNotExists from '../errors/users/UserEmailNotFound'
 import UserEmailExists from '../errors/users/UserEmailExists'
+import UserPasswordIncorrect from '../errors/users/UserPassIncorrect'
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
@@ -31,6 +32,7 @@ class UserService {
   async authentication (payload: IUser): Promise<IUserAuthentication> {
     const emailExists = await userRepository.findByEmail(payload.email)
     if (emailExists === null) throw new UserEmailDoNotExists()
+    if (!await bcrypt.compare(payload.password, emailExists.password)) throw new UserPasswordIncorrect()
     const token: IUserAuthentication = { email: payload.email, token: await this.createToken(payload.email) }
     return token
   }
