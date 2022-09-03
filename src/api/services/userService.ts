@@ -2,6 +2,7 @@ import { IPaginate } from '../models/interfaces/paginateInterface'
 import { IUser, IUserAuthentication } from '../models/interfaces/userInterface'
 import userRepository from '../repositories/userRepository'
 import 'dotenv/config'
+import UserEmailDoNotExists from '../errors/users/UserEmailNotFound'
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
@@ -19,7 +20,9 @@ class UserService {
   }
 
   async deleteByEmail (email: String) {
-    return await userRepository.deleteByEmail(email)
+    const result = await userRepository.deleteByEmail(email)
+    if (result === null) throw new UserEmailDoNotExists()
+    return result
   }
 
   async authentication (payload: IUser): Promise<IUserAuthentication> {
