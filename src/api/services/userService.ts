@@ -33,12 +33,8 @@ class UserService {
     const emailExists = await userRepository.findByEmail(payload.email)
     if (emailExists === null) throw new UserEmailDoNotExists()
     if (!await bcrypt.compare(payload.password, emailExists.password)) throw new UserPasswordIncorrect()
-    const token: IUserAuthentication = { email: payload.email, token: await this.createToken(payload.email) }
+    const token: IUserAuthentication = { email: payload.email, token: await jwt.sign({ id: payload.email }, process.env.JWT_KEY, { expiresIn: '24h' }) }
     return token
-  }
-
-  async createToken (email: String): Promise<String> {
-    return jwt.sign({ id: email }, process.env.JWT_KEY, { expiresIn: '15m' })
   }
 }
 
