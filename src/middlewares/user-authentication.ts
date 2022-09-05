@@ -1,12 +1,18 @@
 import { Request, Response, NextFunction } from 'express'
-import UserTokenMissing from '../api/errors/users/UserTokenMissing'
 const jwt = require('jsonwebtoken')
 
-export default (req: Request, res: Response, next: NextFunction) => {
-  const authorization = req.headers.authorization
-  if (!authorization) throw new UserTokenMissing()
-  const token = authorization
-  jwt.verify(token, process.env.JWT_SECRET, () => {
-    return next()
-  })
+export default async (req: Request, res: Response, next: NextFunction) => {
+  const authHeader = req.headers.authorization
+
+  if (!authHeader) return res.status(401).json({ message: 'Token not provided' })
+
+  const [, token] = authHeader.split(' ')
+
+  try {
+    await jwt.verify(token, process.env.APP_SECRET, () => {
+      return next()
+    })
+  } catch (error) {
+    return res.status(401).json({ message: 'Token do not exists' })
+  }
 }
