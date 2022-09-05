@@ -7,7 +7,7 @@ const router = Router()
 const mainRoute = '/api/v1/user'
 
 router
-  .get(`${mainRoute}`, userController.findAll)
+  .get(`${mainRoute}`, userAuthentication, userController.findAll)
   .post(`${mainRoute}`, userCreateValidation, userController.create)
   .post('/api/v1/authenticate', userCreateValidation, userController.authentication)
   .delete(`${mainRoute}/:email`, userAuthentication, userController.deleteByEmail)
