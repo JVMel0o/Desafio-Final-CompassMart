@@ -14,6 +14,7 @@ const mainRoute = '/api/v1/product'
 router
   .get(`${mainRoute}`, userAuthentication, productController.findAll)
   .get(`${mainRoute}/low_stock`, userAuthentication, productController.findByLowStock)
+  .get(`${mainRoute}/marketplace/:id`, userAuthentication, productController.findByMapper)
   .get(`${mainRoute}/:id`, userAuthentication, productIdValidation, productController.findById)
   .post(`${mainRoute}`, userAuthentication, productCreateValidation, productController.create)
   .post(`${mainRoute}/csv`, userAuthentication, multerConfig.single('file'), productController.createByCSV)
