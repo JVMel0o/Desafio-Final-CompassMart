@@ -1,4 +1,5 @@
 import ProductIdDoNotExists from '../errors/products/productIdDoNotExists'
+import { IWalmart } from '../models/interfaces/mapperInterface'
 import { IVerifyCSV, IProduct, IProductResponse, IProductResponseCSV, IQuery } from '../models/interfaces/productInterface'
 import productRepository from '../repositories/productRepository'
 
@@ -46,12 +47,12 @@ class ProductService {
           ? result.error_details = [{
             title: newProduct.title,
             bar_code: newProduct.bar_code,
-            errors: verify.messages
+            error: verify.messages
           }]
           : result.error_details?.push({
             title: newProduct.title,
             bar_code: newProduct.bar_code,
-            errors: verify.messages
+            error: verify.messages
           })
       }
     };
@@ -158,6 +159,30 @@ class ProductService {
     const result = await productRepository.update(id, payload)
     if (result === null) throw new ProductIdDoNotExists()
     return result
+  }
+
+  async findByMapper (id: string): Promise<IWalmart | null> {
+    const product = await productRepository.findById(id)
+    if (product === null) throw new ProductIdDoNotExists()
+    if (!product) throw new ProductIdDoNotExists()
+
+    const list = 'R$ ' + product.price.toString()
+    const code = product.bar_code.split('', 13)
+
+    const walmartResponse: IWalmart = {
+      id: product._id,
+      product: {
+        category: {
+          path: {
+            name: [product.department]
+          }
+        }
+      },
+      salesPrice: product.price,
+      listPrice: list,
+      codes: code
+    }
+    return walmartResponse
   }
 }
 
