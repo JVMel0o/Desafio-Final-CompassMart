@@ -67,6 +67,7 @@ $ npm run dev
 | -------- | -------- | -------- |
 |`/api/v1/product`|GET|Find all products / Encontra todos os Produtos|
 |`/api/v1/product/low_stock`|GET|Find all with low stock / Encontra produtos com o estoque baixo|
+|`/api/v1/product/marketplace/:id`|GET|Find product by ID with marketplace parameters / Encontra um produto por ID com os parâmetros do marketplace|
 |`/api/v1/product/:id`|GET|Find product by ID / Encontra um produto por ID|
 |`/api/v1/product`|POST|Create product / Cria um produto|
 |`/api/v1/product/csv`|POST|Create product with CSV file / Cria produtos com um arquivo CSV|
@@ -101,6 +102,9 @@ $ npm run dev
 | -------- | -------- | -------- | -------- |
 |`email`|String|true|true|
 |`password`|String|true|false|
+
+## Heroku
+https://dashboard.heroku.com/apps/compass-mart-api
 
 ## :speech_balloon: Author / Autor
 [<img src="https://avatars2.githubusercontent.com/JVMel0o" width=115 > <br> <sub> João Melo </sub>](https://github.com/JVMel0o) |
