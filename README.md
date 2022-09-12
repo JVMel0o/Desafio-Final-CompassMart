@@ -80,7 +80,7 @@ $ npm run dev
 | -------- | -------- | -------- |
 |`/api/v1/user`|GET|Find all users / Encontra todos os usuários|
 |`/api/v1/user`|POST|Create user / Cria um usuário|
-|`/api/v1/authenticate`|POST|Create product with CSV file / Cria produtos com um arquivo CSV|
+|`/api/v1/authenticate`|POST|Recieve a Token / Recebe um Token|
 |`/api/v1/user/:email`|DELETE|Delete user by email / Apaga usuário por email|
 
 ## :file_folder: Schema / Esquema
