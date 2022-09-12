@@ -104,7 +104,7 @@ $ npm run dev
 |`password`|String|true|false|
 
 ## Heroku
-https://dashboard.heroku.com/apps/compass-mart-api
+https://compass-mart-api.herokuapp.com/
 
 ## :speech_balloon: Author / Autor
 [<img src="https://avatars2.githubusercontent.com/JVMel0o" width=115 > <br> <sub> João Melo </sub>](https://github.com/JVMel0o) |
