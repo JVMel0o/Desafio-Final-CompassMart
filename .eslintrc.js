@@ -33,4 +33,4 @@ module.exports = {
     yoda: 'error',
     'quote-props': ['error', 'as-needed']
   }
-}
+};
