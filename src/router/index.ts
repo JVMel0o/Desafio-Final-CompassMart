@@ -1,4 +1,4 @@
-import productRouter from './product-route';
-import userRouter from './user-route';
+import productRouter from './product-route'
+import userRouter from './user-route'
 
-export default [productRouter, userRouter];
+export default [productRouter, userRouter]
