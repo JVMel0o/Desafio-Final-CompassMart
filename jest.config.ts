@@ -18,11 +18,11 @@ export default {
   collectCoverageFrom: ['src/**'],
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: 'coverage',
+  coverageDirectory: '__tests__/coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   coveragePathIgnorePatterns: [
-    '/node_modules/', 'src/api/models/interfaces', ''
+    '/node_modules/', '/src/api/models/', '/src/server.ts', '/src/mapper'
   ],
 
   // Indicates which provider should be used to instrument code for coverage
@@ -148,10 +148,9 @@ export default {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  // testMatch: [
-  //   "**/__tests__/**/*.[jt]s?(x)",
-  //   "**/?(*.)+(spec|test).[tj]s?(x)"
-  // ],
+  testMatch: [
+    '**/__tests__/**/*.test.ts'
+  ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   testPathIgnorePatterns: [
@@ -186,4 +185,4 @@ export default {
 
   // Whether to use watchman for file crawling
   // watchman: true,
-};
+}
