@@ -13,4 +13,26 @@ describe('Create user', () => {
       })
     expect(response.status).toBe(201)
   })
+
+  it('it should not create a user with invalid credentials', async () => {
+    const response = await
+    request(app)
+      .post('/api/v1/user')
+      .send({
+        email: 'emailteste.com',
+        password: 123456
+      })
+    expect(response.status).toBe(400)
+  })
+
+  it('it should not create a user if email already exists', async () => {
+    const response = await
+    request(app)
+      .post('/api/v1/user')
+      .send({
+        email: 'test@email.com',
+        password: '123456'
+      })
+    expect(response.status).toBe(400)
+  })
 })
