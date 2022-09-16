@@ -33,6 +33,6 @@ describe('Authentication', () => {
         email: 'notexists@email.com',
         password: '123456'
       })
-    expect(response.status).toBe(400)
+    expect(response.status).toBe(404)
   })
 })
