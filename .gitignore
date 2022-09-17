@@ -2,4 +2,8 @@ node_modules
 
 .env
 
-logs/
+logs
+
+coverage
+
+__test__/coverage

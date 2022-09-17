@@ -1,8 +1,8 @@
 <h1 align="center"> <img src="https://user-images.githubusercontent.com/65569815/176964539-fe858838-0d07-418e-9220-b6d94461ecee.png" width=1000> </h1>
 <h1 align="center"> :department_store: :compass: CompassMart :compass: :department_store: </h1>
 
-<p align="center"> Part 02 of the final challenge of Compass.uol 's NodeJS Scholarship Program </p>
-<p align="center"> Parte 02 do desafio final do Programa de Bolsas de NodeJS da Compass.uol </p>
+<p align="center"> Final part of the final challenge of Compass.uol 's NodeJS Scholarship Program </p>
+<p align="center"> Parte final do desafio final do Programa de Bolsas de NodeJS da Compass.uol </p>
 
 ## :pencil: Description / Descrição
 <p align="left"> Compasso is undertaking in a market branch and aggregated with CompassMart, a department store, focused in food commerce, are requisiting their API's Back-end. </p>
@@ -47,19 +47,48 @@ $ npm install
 # Iniciar a aplicação em localhost:3000
 $ npm run dev
 ```
+## :alembic: Tests / Testes
+After installing and setting up the whole project you may run the following command to see the tests case
+
+Depois de instalar e configurar todo o projeto você pode executar o seguinte comando para ver os casos de testes
+
+```
+$ npm test
+```
+
 ## :fuelpump: Dependencies / Dependências
-- bcrypt
-- cors
-- dotenv
-- express
-- joi
-- jsonwebtoken
-- mongoose
-- mongoose-paginate-ts
-- mongoose-paginate-v2
-- morgan
-- multer
-- winstom
+- bcrypt ^5.0.1
+- cors ^2.8.5
+- dotenv ^16.0.1
+- express ^4.18.1
+- joi ^17.6.0
+- jsonwebtoken ^8.5.1
+- mongoose ^6.5.2
+- mongoose-paginate-ts ^1.2.7
+- mongoose-paginate-v2 ^1.7.0
+- morgan ^1.10.0
+- multer ^1.4.5-lts.1
+- winstom ^3.8.1
+
+## :fuelpump: Development Dependencies / Dependências de desenvolvimento
+- @types/cors ^2.8.12
+- @types/express ^4.17.13
+- @types/jest ^29.0.2
+- @types/mongoose ^5.11.97
+- @types/morgan ^1.9.3
+- @types/multer ^1.4.7
+- @typescript-eslint/eslint-plugin ^5.0.0
+- eslint ^8.21.0
+- eslint-config-standard-with-typescript ^23.0.0
+- eslint-plugin-import ^2.25.2
+- eslint-plugin-n ^15.0.0
+- eslint-plugin-promise ^6.0.0
+- jest ^29.0.3
+- nodemon ^2.0.19
+- supertest ^6.2.4
+- ts-jest ^29.0.1
+- ts-node ^10.9.1
+- typescript ^4.7.4
 
 ## :door: Endpoints
 ### Products Endpoint / Endpoint de produtos
