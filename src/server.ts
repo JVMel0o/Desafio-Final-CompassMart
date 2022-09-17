@@ -1,8 +1,13 @@
 import morganMiddleware from './api/logger/morgan'
 import app from './app'
 import Logger from './api/logger/winston'
+import swagger from '../src/api/swagger/swagger.json'
 
 app.use(morganMiddleware)
+
+app.get('/', (_, res) => {
+  res.send(swagger)
+})
 
 app.get('/logger', (_, res) => {
   Logger.error('This is an error log')
