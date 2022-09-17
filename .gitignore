@@ -1,9 +1,7 @@
-node_modules
-
-.env
+__test__/coverage
 
 logs
 
-coverage
+node_modules
 
-__test__/coverage
+.env
